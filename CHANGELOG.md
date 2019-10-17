@@ -1,5 +1,9 @@
 # Releases
 
+## 3.1.0
+
+- Add `resetForm` to the payload of `onSuccess`
+
 ## 3.0.0
 
 - Update onSubmit to contain an object of props and errorSetters
