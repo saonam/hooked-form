@@ -112,7 +112,9 @@ const OptionsContainer = <Values extends object>({
 
       // Run validations when needed.
       React.useEffect(() => {
-        validateForm();
+        if (validateOnBlur || validateOnChange) {
+          validateForm();
+        }
       }, [validateOnBlur && touched, validateOnChange && values]);
 
       // The onChange we can use for our Fields,
