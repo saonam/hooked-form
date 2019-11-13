@@ -1,5 +1,13 @@
 # Releases
 
+## 3.2.0
+
+- Add `setError` to the context
+
+## 3.1.1
+
+- Don't validate on initial mount
+
 ## 3.1.0
 
 - Add `resetForm` to the payload of `onSuccess`

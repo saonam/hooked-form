@@ -51,12 +51,12 @@ const OptionsContainer = <Values extends object>({
       ]);
 
       const { 0: values, 1: setFieldValue, 2: setValuesState } = useState(() =>
-        mapPropsToValues ? mapPropsToValues(props) : initialValues
+        mapPropsToValues ? mapPropsToValues(props) : initialValues,
       );
 
       const { 0: touched, 1: touch, 2: setTouchedState } = useState(EMPTY_OBJ);
 
-      const { 0: formErrors, 2: setErrorState } = useState(EMPTY_OBJ);
+      const { 0: formErrors, 1: setFieldError, 2: setErrorState } = useState(EMPTY_OBJ);
 
       const { 0: isSubmitting, 1: setSubmitting } = React.useState(false);
       const { 0: formError, 1: setFormError } = React.useState();
@@ -87,7 +87,7 @@ const OptionsContainer = <Values extends object>({
           }
 
           return new Promise(resolve =>
-            resolve(onSubmit(values, { props, setErrors: setErrorState, setFormError }))
+            resolve(onSubmit(values, { props, setErrors: setErrorState, setFormError })),
           )
             .then((result: any) => {
               setSubmitting(false);
@@ -98,7 +98,7 @@ const OptionsContainer = <Values extends object>({
               if (onError) onError(e, setFormError);
             });
         },
-        [values]
+        [values],
       );
 
       React.useEffect(() => {
@@ -129,6 +129,7 @@ const OptionsContainer = <Values extends object>({
           errors: formErrors as Errors,
           formError,
           isDirty,
+          setFieldError,
           setFieldTouched: (fieldId: string, value?: boolean) => {
             touch(fieldId, value == null ? true : value);
           },
@@ -137,7 +138,7 @@ const OptionsContainer = <Values extends object>({
           validate: validateForm,
           values,
         }),
-        [formErrors, formError, isDirty, onChange, touched, validateForm, values]
+        [formErrors, formError, isDirty, onChange, touched, validateForm, values],
       );
 
       const comp = React.useMemo(
@@ -155,7 +156,7 @@ const OptionsContainer = <Values extends object>({
             {...props}
           />
         ),
-        [...passDownProps, formError, isSubmitting]
+        [...passDownProps, formError, isSubmitting],
       );
 
       return <Provider value={providerValue}>{comp}</Provider>;
