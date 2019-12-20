@@ -185,11 +185,13 @@ describe('HookedForm', () => {
     });
     let { submit } = getProps();
     const { setFieldValue } = getProps();
-    await act(async () => {
-      await submit();
-      const { isSubmitting } = getProps();
-      expect(isSubmitting).toBeTruthy();
+    let promise;
+    act(() => {
+      promise = submit();
     });
+    const { isSubmitting } = getProps();
+    expect(isSubmitting).toBeTruthy();
+    await promise;
     expect(onSubmit).toBeCalled();
     expect(onSubmit).toBeCalledTimes(1);
     expect(onSuccess).toBeCalledTimes(1);
